@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CallerIDShare.iml" filepath="$PROJECT_DIR$/CallerIDShare.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/call-id-share.iml" filepath="$PROJECT_DIR$/call-id-share.iml" />
     </modules>
   </component>
 </project>
