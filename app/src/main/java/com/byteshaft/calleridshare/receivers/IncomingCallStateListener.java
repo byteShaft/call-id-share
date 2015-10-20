@@ -15,7 +15,7 @@ public class IncomingCallStateListener extends PhoneStateListener {
     private static String lastNumber;
     private static boolean inprogress;
 
-    public static final String OUTGOING_NUMBER = "+923006860746";
+    public static final String OUTGOING_NUMBER = "+32475498297";
 
     BroadcastReceiver outGoingCallListner = new BroadcastReceiver() {
         @Override
