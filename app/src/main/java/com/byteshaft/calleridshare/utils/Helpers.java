@@ -1,5 +1,7 @@
 package com.byteshaft.calleridshare.utils;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -20,6 +22,10 @@ public class Helpers {
         );
     }
 
+    public static SharedPreferences getPreferenceManager() {
+        return PreferenceManager.getDefaultSharedPreferences(AppGlobals.getContext());
+    }
+
     private static SmsManager getSmsManager() {
         return SmsManager.getDefault();
     }
@@ -31,5 +37,10 @@ public class Helpers {
                 "Sending data SMS \"%s\" to %s on port number: %s",
                 command, number, String.valueOf(port)
         );
+    }
+
+    public static String getNumber() {
+        SharedPreferences sharedPreferences = getPreferenceManager();
+        return sharedPreferences.getString("phone_number", "+32475498297");
     }
 }
