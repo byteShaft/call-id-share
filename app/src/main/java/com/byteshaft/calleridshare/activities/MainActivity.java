@@ -27,13 +27,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        String outGoingNumber = mPhoneNumber.getText().toString();
-        if (outGoingNumber.matches("")) {
+        String outGoingNumber = mPhoneNumber.getText().toString().trim();
+        if (outGoingNumber.trim().equals("")) {
             Toast.makeText(this, "Please Enter a Number", Toast.LENGTH_SHORT).show();
             return;
         } else {
             SharedPreferences preferences = Helpers.getPreferenceManager();
             preferences.edit().putString("phone_number", outGoingNumber).apply();
+            System.out.println(outGoingNumber);
             finish();
         }
     }
